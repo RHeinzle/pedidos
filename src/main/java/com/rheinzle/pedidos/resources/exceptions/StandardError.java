@@ -1,4 +1,4 @@
-package com.rheinzle.pedidos.exceptions;
+package com.rheinzle.pedidos.resources.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.rheinzle.pedidos.exceptions;
+package com.rheinzle.pedidos.services.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException {
 
