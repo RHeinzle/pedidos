@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.rheinzle.pedidos.domain.Categoria;
+import com.rheinzle.pedidos.dto.CategoriaDTO;
 import com.rheinzle.pedidos.repositories.CategoriaRepository;
 import com.rheinzle.pedidos.services.exceptions.DataIntegrityException;
 import com.rheinzle.pedidos.services.exceptions.ObjectNotFoundException;
@@ -53,6 +54,11 @@ public class CategoriaService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos!");
 		}
+
+	}
+
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getNome());
 
 	}
 

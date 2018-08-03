@@ -6,11 +6,9 @@ import com.rheinzle.pedidos.domain.enums.EstadoPagamento;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class PagamentoCartao extends Pagamento {
 

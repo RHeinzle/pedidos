@@ -9,11 +9,9 @@ import com.rheinzle.pedidos.domain.enums.EstadoPagamento;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class PagamentoBoleto extends Pagamento {
 
@@ -30,5 +28,12 @@ public class PagamentoBoleto extends Pagamento {
 		this.dataVencimento = dataVencimento;
 		this.dataPagamento = dataPagamento;
 	}
+
+	public PagamentoBoleto(Integer id, EstadoPagamento estado, Pedido pedido) {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 
 }

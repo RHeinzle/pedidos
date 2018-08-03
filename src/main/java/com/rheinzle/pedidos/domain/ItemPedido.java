@@ -7,14 +7,10 @@ import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class ItemPedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -13,13 +13,19 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rheinzle.pedidos.domain.enums.EstadoPagamento;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@RequiredArgsConstructor
+@ToString
+@EqualsAndHashCode
 public abstract class Pagamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;

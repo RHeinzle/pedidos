@@ -20,12 +20,10 @@ import com.rheinzle.pedidos.domain.enums.TipoCliente;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class Cliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;

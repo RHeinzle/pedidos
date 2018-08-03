@@ -10,11 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class Cidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -11,11 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
