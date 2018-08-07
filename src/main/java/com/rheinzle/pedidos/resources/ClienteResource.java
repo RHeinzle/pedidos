@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.rheinzle.pedidos.domain.Cliente;
 import com.rheinzle.pedidos.dto.ClienteDTO;
+import com.rheinzle.pedidos.dto.ClienteNewDTO;
 import com.rheinzle.pedidos.services.ClienteService;
 
 @RestController
@@ -35,7 +36,7 @@ public class ClienteResource {
 
 		return ResponseEntity.ok(cliente);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<ClienteDTO>> findAll() {
 		List<Cliente> list = service.findAll();
@@ -56,7 +57,7 @@ public class ClienteResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
 		Cliente obj = service.insert(service.fromDTO(objDto));
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 

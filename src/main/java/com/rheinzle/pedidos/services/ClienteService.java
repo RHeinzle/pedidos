@@ -2,7 +2,6 @@ package com.rheinzle.pedidos.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -71,9 +70,9 @@ public class ClienteService {
 	public Cliente fromDTO(ClienteNewDTO objDto) {
 		Cliente cliente = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfCnpj(),
 				TipoCliente.toEnum(objDto.getTipo()));
-		cliente.setTelefones(objDto.getTelefones());
-		cliente.setEnderecos(objDto.getEnderecos().stream().map(enderecoDto -> enderecoService.fromDTO(enderecoDto))
-				.collect(Collectors.toList()));
+		// cliente.setTelefones(objDto.getTelefones());
+		// cliente.setEnderecos(objDto.getEnderecos().stream().map(enderecoDto ->
+		// enderecoService.fromDTO(enderecoDto)).collect(Collectors.toList()));
 		return cliente;
 
 	}
