@@ -1,5 +1,6 @@
 package com.rheinzle.pedidos.services;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +11,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.rheinzle.pedidos.domain.Cidade;
 import com.rheinzle.pedidos.domain.Cliente;
+import com.rheinzle.pedidos.domain.Endereco;
 import com.rheinzle.pedidos.domain.enums.TipoCliente;
 import com.rheinzle.pedidos.dto.ClienteDTO;
 import com.rheinzle.pedidos.dto.ClienteNewDTO;
@@ -24,8 +27,8 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository repo;
 
-	@Autowired
-	private EnderecoService enderecoService;
+	// @Autowired
+	// private EnderecoService enderecoService;
 
 	public Cliente find(Integer id) {
 		Optional<Cliente> obj = repo.findById(id);
@@ -70,6 +73,14 @@ public class ClienteService {
 	public Cliente fromDTO(ClienteNewDTO objDto) {
 		Cliente cliente = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfCnpj(),
 				TipoCliente.toEnum(objDto.getTipo()));
+
+		Cidade cidade = new Cidade(objDto.getCidade(), null, null);
+		Endereco endereco = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(),
+				objDto.getBairro(), objDto.getCep(), cidade, cliente);
+
+		cliente.setEnderecos(Arrays.asList(endereco));
+		cliente.getTelefones().add(objDto.getTelefone());
+
 		// cliente.setTelefones(objDto.getTelefones());
 		// cliente.setEnderecos(objDto.getEnderecos().stream().map(enderecoDto ->
 		// enderecoService.fromDTO(enderecoDto)).collect(Collectors.toList()));
