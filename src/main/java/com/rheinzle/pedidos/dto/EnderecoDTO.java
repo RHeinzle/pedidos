@@ -2,15 +2,12 @@ package com.rheinzle.pedidos.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-
 import com.rheinzle.pedidos.domain.Endereco;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor

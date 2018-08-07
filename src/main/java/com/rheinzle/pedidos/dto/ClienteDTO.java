@@ -2,7 +2,6 @@ package com.rheinzle.pedidos.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -14,7 +13,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor

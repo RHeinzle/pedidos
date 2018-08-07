@@ -2,13 +2,10 @@ package com.rheinzle.pedidos.dto;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
