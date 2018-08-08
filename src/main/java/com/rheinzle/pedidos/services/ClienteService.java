@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.rheinzle.pedidos.domain.Cidade;
 import com.rheinzle.pedidos.domain.Cliente;
@@ -18,6 +19,7 @@ import com.rheinzle.pedidos.domain.enums.TipoCliente;
 import com.rheinzle.pedidos.dto.ClienteDTO;
 import com.rheinzle.pedidos.dto.ClienteNewDTO;
 import com.rheinzle.pedidos.repositories.ClienteRepository;
+import com.rheinzle.pedidos.repositories.EnderecoRepository;
 import com.rheinzle.pedidos.services.exceptions.DataIntegrityException;
 import com.rheinzle.pedidos.services.exceptions.ObjectNotFoundException;
 
@@ -27,8 +29,8 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository repo;
 
-	// @Autowired
-	// private EnderecoService enderecoService;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 	public Cliente find(Integer id) {
 		Optional<Cliente> obj = repo.findById(id);
@@ -45,9 +47,12 @@ public class ClienteService {
 		return repo.findAll(pageRequest);
 	}
 
+	@Transactional
 	public Cliente insert(Cliente obj) {
 		obj.setId(null);
-		return repo.save(obj);
+		obj = repo.save(obj);
+		enderecoRepository.saveAll(obj.getEnderecos());
+		return obj;
 	}
 
 	public Cliente update(Cliente obj) {
@@ -81,9 +86,7 @@ public class ClienteService {
 		cliente.setEnderecos(Arrays.asList(endereco));
 		cliente.getTelefones().add(objDto.getTelefone());
 
-		// cliente.setTelefones(objDto.getTelefones());
-		// cliente.setEnderecos(objDto.getEnderecos().stream().map(enderecoDto ->
-		// enderecoService.fromDTO(enderecoDto)).collect(Collectors.toList()));
+//		cliente.setTelefones(objDto.getTelefones());
 		return cliente;
 
 	}

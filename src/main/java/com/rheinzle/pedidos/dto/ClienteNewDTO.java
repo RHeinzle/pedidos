@@ -1,6 +1,8 @@
 package com.rheinzle.pedidos.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,8 +31,6 @@ public class ClienteNewDTO implements Serializable {
 	private String bairro;
 	private String cep;
 	private Integer cidade;
-
-	// private List<EnderecoDTO> enderecos = new ArrayList<>();
 
 	// private Set<String> telefones = new HashSet<>();
 
