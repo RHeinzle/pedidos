@@ -25,9 +25,9 @@ public class ProdutoService {
 	private CategoriaRepository categoriaRepository;
 
 	public Produto find(Integer id) {
-		Optional<Produto> obj = repo.findById(id);
+		Optional<Produto> optionalProduto = repo.findById(id);
 
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id));
+		return optionalProduto.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id));
 	}
 
 	public Page<Produto> search(String nome, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy,

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.rheinzle.pedidos.domain.enums.EstadoPagamento;
 
 import lombok.Data;
@@ -13,6 +14,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
+@JsonTypeName("pagamentoBoleto")
 public class PagamentoBoleto extends Pagamento {
 
 	private static final long serialVersionUID = 1L;

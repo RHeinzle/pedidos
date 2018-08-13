@@ -55,12 +55,7 @@ public class Pedido implements Serializable {
 	}
 
 	public double getValorTotal() {
-		double soma = 0.0;
-		for (ItemPedido itemPedido : itens) {
-			soma += itemPedido.getSubTotal();
-
-		}
-		return soma;
+		return itens.stream().mapToDouble(i -> i.getSubTotal()).sum();
 	}
 
 }

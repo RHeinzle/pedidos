@@ -33,9 +33,9 @@ public class ClienteService {
 	private EnderecoRepository enderecoRepository;
 
 	public Cliente find(Integer id) {
-		Optional<Cliente> obj = repo.findById(id);
+		Optional<Cliente> cliente = repo.findById(id);
 
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id));
+		return cliente.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id));
 	}
 
 	public List<Cliente> findAll() {
@@ -48,17 +48,17 @@ public class ClienteService {
 	}
 
 	@Transactional
-	public Cliente insert(Cliente obj) {
-		obj.setId(null);
-		obj = repo.save(obj);
-		enderecoRepository.saveAll(obj.getEnderecos());
-		return obj;
+	public Cliente insert(Cliente cliente) {
+		cliente.setId(null);
+		cliente = repo.save(cliente);
+		enderecoRepository.saveAll(cliente.getEnderecos());
+		return cliente;
 	}
 
-	public Cliente update(Cliente obj) {
-		Cliente newObj = find(obj.getId());
-		updateData(newObj, obj);
-		return repo.save(newObj);
+	public Cliente update(Cliente cliente) {
+		Cliente newCliente = find(cliente.getId());
+		updateData(newCliente, cliente);
+		return repo.save(newCliente);
 	}
 
 	public void delete(Integer id) {
@@ -70,29 +70,29 @@ public class ClienteService {
 		}
 	}
 
-	public Cliente fromDTO(ClienteDTO objDto) {
-		return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null);
+	public Cliente fromDTO(ClienteDTO clienteDto) {
+		return new Cliente(clienteDto.getId(), clienteDto.getNome(), clienteDto.getEmail(), null, null);
 
 	}
 
-	public Cliente fromDTO(ClienteNewDTO objDto) {
-		Cliente cliente = new Cliente(null, objDto.getNome(), objDto.getEmail(), objDto.getCpfCnpj(),
-				TipoCliente.toEnum(objDto.getTipo()));
+	public Cliente fromDTO(ClienteNewDTO clienteDto) {
+		Cliente cliente = new Cliente(null, clienteDto.getNome(), clienteDto.getEmail(), clienteDto.getCpfCnpj(),
+				TipoCliente.toEnum(clienteDto.getTipo()));
 
-		Cidade cidade = new Cidade(objDto.getCidade(), null, null);
-		Endereco endereco = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(),
-				objDto.getBairro(), objDto.getCep(), cidade, cliente);
+		Cidade cidade = new Cidade(clienteDto.getCidade(), null, null);
+		Endereco endereco = new Endereco(null, clienteDto.getLogradouro(), clienteDto.getNumero(),
+				clienteDto.getComplemento(), clienteDto.getBairro(), clienteDto.getCep(), cidade, cliente);
 
 		cliente.setEnderecos(Arrays.asList(endereco));
-		cliente.getTelefones().add(objDto.getTelefone());
+		cliente.getTelefones().add(clienteDto.getTelefone());
 
-//		cliente.setTelefones(objDto.getTelefones());
+//		cliente.setTelefones(clienteDto.getTelefones());
 		return cliente;
 
 	}
 
-	private void updateData(Cliente newObj, Cliente obj) {
-		newObj.setNome(obj.getNome());
-		newObj.setEmail(obj.getEmail());
+	private void updateData(Cliente newCliente, Cliente cliente) {
+		newCliente.setNome(cliente.getNome());
+		newCliente.setEmail(cliente.getEmail());
 	}
 }

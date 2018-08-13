@@ -23,9 +23,9 @@ public class CategoriaService {
 	private CategoriaRepository repo;
 
 	public Categoria find(Integer id) {
-		Optional<Categoria> obj = repo.findById(id);
+		Optional<Categoria> optionalCategoria = repo.findById(id);
 
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id));
+		return optionalCategoria.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id));
 	}
 
 	public List<Categoria> findAll() {
@@ -37,15 +37,15 @@ public class CategoriaService {
 		return repo.findAll(pageRequest);
 	}
 
-	public Categoria insert(Categoria obj) {
-		obj.setId(null);
-		return repo.save(obj);
+	public Categoria insert(Categoria categoria) {
+		categoria.setId(null);
+		return repo.save(categoria);
 	}
 
-	public Categoria update(Categoria obj) {
-		Categoria newObj = find(obj.getId());
-		updateData(newObj, obj);
-		return repo.save(newObj);
+	public Categoria update(Categoria categoria) {
+		Categoria newCategoria = find(categoria.getId());
+		updateData(newCategoria, categoria);
+		return repo.save(newCategoria);
 	}
 
 	public void delete(Integer id) {
@@ -58,13 +58,13 @@ public class CategoriaService {
 
 	}
 
-	public Categoria fromDTO(CategoriaDTO objDto) {
-		return new Categoria(objDto.getId(), objDto.getNome());
+	public Categoria fromDTO(CategoriaDTO categoriaDto) {
+		return new Categoria(categoriaDto.getId(), categoriaDto.getNome());
 
 	}
 
-	private void updateData(Categoria newObj, Categoria obj) {
-		newObj.setNome(obj.getNome());
+	private void updateData(Categoria newCategoria, Categoria categoria) {
+		newCategoria.setNome(categoria.getNome());
 	}
 
 }
