@@ -32,7 +32,7 @@ public class CategoriaResource {
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 		Categoria categoria = service.find(id);
 
-		return ResponseEntity.ok(categoria);
+		return ResponseEntity.ok().body(categoria);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -55,19 +55,21 @@ public class CategoriaResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
-		Categoria obj = service.insert(service.fromDTO(objDto));
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO categoriaDto) {
+		Categoria categoria = service.insert(service.fromDTO(categoriaDto));
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId())
+				.toUri();
 
 		return ResponseEntity.created(uri).build();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
-		Categoria obj = service.fromDTO(objDto);
-		obj.setId(id);
-		obj = service.update(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO categoriaDto, @PathVariable Integer id) {
+		Categoria categoria = service.fromDTO(categoriaDto);
+		categoria.setId(id);
+		categoria = service.update(categoria);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId())
+				.toUri();
 
 		return ResponseEntity.created(uri).build();
 	}

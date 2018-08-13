@@ -34,7 +34,7 @@ public class ClienteResource {
 
 		Cliente cliente = service.find(id);
 
-		return ResponseEntity.ok(cliente);
+		return ResponseEntity.ok().body(cliente);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -57,19 +57,21 @@ public class ClienteResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) {
-		Cliente obj = service.insert(service.fromDTO(objDto));
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO clienteDto) {
+		Cliente cliente = service.insert(service.fromDTO(clienteDto));
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId())
+				.toUri();
 
 		return ResponseEntity.created(uri).build();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id) {
-		Cliente obj = service.fromDTO(objDto);
-		obj.setId(id);
-		obj = service.update(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO clienteDto, @PathVariable Integer id) {
+		Cliente cliente = service.fromDTO(clienteDto);
+		cliente.setId(id);
+		cliente = service.update(cliente);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId())
+				.toUri();
 
 		return ResponseEntity.created(uri).build();
 	}

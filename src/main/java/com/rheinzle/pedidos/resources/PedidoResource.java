@@ -22,7 +22,7 @@ public class PedidoResource {
 
 		Pedido pedido = service.find(id);
 
-		return ResponseEntity.ok(pedido);
+		return ResponseEntity.ok().body(pedido);
 	}
 
 }
